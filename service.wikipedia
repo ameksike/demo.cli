@@ -1,0 +1,56 @@
+#! /bin/bash
+### BEGIN INIT INFO 
+# @provides		service.wikipedia
+# @author		Antonio Membrides Espinosa
+# @author_URI:  https://github.com/ameksike
+# @package  	Task
+# @date			15/01/2018
+# @update		15/02/2018
+# @version    	1.0
+# @license    	GPL
+# @short		Wikipedia sevice manager
+# @description 	This service is used to manage a wikipedia sevice
+### END INIT INFO
+
+# ejemplo de gestion de errores
+_ERR_HDR_FMT="%.23s %s[%s]: "
+_ERR_MSG_FMT="${_ERR_HDR_FMT}%s\n"
+
+error_msg() {
+  printf "$_ERR_MSG_FMT" $(date +%F.%T.%N) ${BASH_SOURCE[1]##*/} ${BASH_LINENO[0]} "${@}"
+}
+
+case "$1" in
+    start)
+		bin=/var/www/wikipedia/kiwix/bin/kiwix-serve
+		data=/var/www/wikipedia/data/content/wikipedia_es_all_novid_2017-08.zimaa
+		index=/wikipedia/
+		
+        echo "Starting wikipedia.service"
+		echo "bin=>$bin"
+		echo "data=>$data"
+		echo "index=>$index"
+        $bin --verbose --port=8081 --daemon $data --index=$index
+        ;;
+    stop)
+        echo "Stopping wikipedia.service"
+        killall kiwix-serve
+        ;;
+		
+    status)
+        echo "Status wikipedia.service"
+        ps -e | grep kiwix-serve
+        ;;
+		
+    *)
+        echo "Usage: $0 start|stop|status"
+		#error_msg "here"
+        exit 1
+        ;;
+esac
+
+exit 0
+
+
+
+

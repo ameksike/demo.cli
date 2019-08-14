@@ -1,0 +1,31 @@
+#!/bin/bash
+### BEGIN INIT INFO 
+# @provides		backup.ginex
+# @author		Antonio Membrides Espinosa
+# @author_URI:  https://github.com/ameksike
+# @package  	Task
+# @date			15/01/2018
+# @update		15/02/2018
+# @version    	1.0
+# @license    	GPL
+# @short		
+# @description 	Data Base Backup
+### END INIT INFO
+
+#... config database ....
+_SERVER=192.168.1.10
+_PORT=3306
+_USER=desoft
+_PASS=abcd-1234
+_NAME=ginex
+_DBIN=vdb-mysql-v5.5.59
+
+#... config store ....
+_DATE=`date '+%Y%m%d.%H%M'`
+_PATH=/media/store/backup/db/
+_FILE=$_PATH/db.$_DATE.$_NAME.$_DBIN.sql
+_TMPF=/tmp/backup.$_DATE.$_NAME.$_DBIN.sql
+
+#... run command ....
+mysqldump --host=$_SERVER --user=$_USER --password=$_PASS $_NAME --protocol=tcp --port=$_PORT --default-character-set=utf8  > $_FILE
+#mysqldump --host=$_SERVER --user=$_USER --protocol=tcp --port=3306 --default-character-set=utf8 --skip-triggers "$_NAME" --defaults-file="/tmp/tmpttB_Ob/extraparams.cnf" --set-gtid-purged=OFF 

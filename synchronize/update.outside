@@ -1,0 +1,21 @@
+#!/bin/bash
+### BEGIN INIT INFO 
+# @provides		backup.gemcal
+# @author		Antonio Membrides Espinosa
+# @author_URI:  https://github.com/ameksike
+# @package  	Task
+# @date			15/01/2018
+# @update		15/02/2018
+# @version    	1.0
+# @license    	GPL
+# @short		
+# @description 	Data Base Backup
+### END INIT INFO
+
+_USER=root
+_HOST=10.120.22.27
+_LOGF=/var/log/rsync.backup.log
+_PATH=/media/store/backup/db/
+_STOR=/media/hdd03/data/backups/db/
+
+rsync -e ssh -avz $_PATH $_USER@$_HOST:$_STOR 2>&1 > $_LOGF 

@@ -1,0 +1,48 @@
+#!/bin/bash
+### BEGIN INIT INFO 
+# @provides		backup.gemcal
+# @author		Antonio Membrides Espinosa
+# @author_URI:  https://github.com/ameksike
+# @package  	Task
+# @date			15/01/2018
+# @update		15/02/2018
+# @version    	1.0
+# @license    	GPL
+# @short		
+# @description 	Data Base Backup
+### END INIT INFO
+
+#... config database ....
+_SERVER=192.168.1.8
+_PORT=5432
+_USER=postgres
+_PASS=postgres
+_NAME=gemcal
+_DBIN=vdb-pgsql-v9.1.24lts2
+
+#... config store ....
+_DATE=`date '+%Y%m%d.%H%M'`
+_PATH=/media/store/backup/db/
+_FILEP=$_PATH/db.$_DATE.$_NAME.$_DBIN.sql
+_FILEC=$_PATH/db.$_DATE.$_NAME.$_DBIN.backup
+_TMPF=/tmp/backup.$_DATE.$_NAME.$_DBIN.sql
+
+#... run command ....
+PGPASSWORD=$_PASS pg_dump --host $_SERVER --port 5432 --username $_USER --no-password --format plain --create --clean --encoding UTF8 --inserts --verbose --file $_FILEP $_NAME
+PGPASSWORD=$_PASS pg_dump --host $_SERVER --port $_PORT --username $_USER --no-password --format custom --blobs --inserts --verbose --file $_FILEC $_NAME
+
+#pg_dump -h $_SERVER -p $_PORT -U $_USER -F c -b -v -f $_FILE $_NAME
+# pg_dump es el comando en si mismo.
+# -i le indica que ignore la versión (entre el comando y la base de datos).
+# -h localhost especifica el host del motor de base de datos (localhost en este caso).
+# -p 5432 es la indicación del puerto donde corre el servicio.
+# -U postgres es para indicarle que usaremos el usuario postgres.
+# -F indica el formato de salida.
+# c es la elección del formato (comprime en este caso).
+# -b indica que vuelque los LO (large objects).
+# -v verbose.
+# -f es el archivo de salida.
+# /home/damian/backups/mibase.backup es el nombre para el archivo de salida (con path).
+# mibase es el nombre de la base a backupear.
+# Restaurar
+# psql -h $_SERVER -p $_PORT -U $_USER -f "E:/prueba.sql" nombre_basedatos

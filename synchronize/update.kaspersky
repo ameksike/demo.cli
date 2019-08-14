@@ -1,0 +1,24 @@
+#!/bin/bash
+### BEGIN INIT INFO 
+# @provides		update.kaspersky
+# @author		Antonio Membrides Espinosa
+# @author_URI:  https://github.com/ameksike
+# @package  	Task
+# @date			05/10/2017
+# @update		15/02/2018
+# @version    	1.0
+# @license    	GPL
+# @short		
+# @description 	Update Antivirus
+### END INIT INFO
+
+#......................................................................
+#... Ruta de la fuente de actualización
+SRC="ftp://pub.desoft.cu/Antivirus/Kaspersky/Updates/" 
+#... Ruta del destino de actualización
+DES="/srv/ftp/bin/antivirus/kaspersky/update/" 
+#... Opciones
+OPT="mirror --delete --depth-first --only-newer --no-empty-dirs --loop --verbose --log=/etc/proftpd/task/log/update.kaspersky.log"
+#... Comando
+lftp -c mirror $SRC $DES/ $OPT
+#......................................................................

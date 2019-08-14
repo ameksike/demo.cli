@@ -1,0 +1,15 @@
+#!/bin/bash
+### BEGIN INIT INFO 
+# @provides		save.store
+# @author		Antonio Membrides Espinosa
+# @author_URI:  https://github.com/ameksike
+# @package  	Task
+# @date			15/01/2018
+# @update		15/02/2018
+# @version    	1.0
+# @license    	GPL
+# @short		
+# @description 	Data Base Backup
+### END INIT INFO
+
+rsync -rtvzu --delete-delay /home/desoft/dumps root:abcd-1234@store.cfg.desoft.cu/srv/data

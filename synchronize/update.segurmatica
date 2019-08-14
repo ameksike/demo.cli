@@ -1,0 +1,25 @@
+#!/bin/bash
+#!/bin/bash
+### BEGIN INIT INFO 
+# @provides		update.segurmatica
+# @author		Antonio Membrides Espinosa
+# @author_URI:  https://github.com/ameksike
+# @package  	Task
+# @date			05/10/2017
+# @update		15/02/2018
+# @version    	1.0
+# @license    	GPL
+# @short		
+# @description 	Update Antivirus
+### END INIT INFO
+
+#......................................................................
+#... Ruta de la fuente de actualización
+SRC="http://www.segurmatica.cu/descargas/actualizaciones/segavzip/" 
+#... Ruta del destino de actualización
+DES="/srv/ftp/bin/antivirus/segurmatica/update.zip/" 
+#... Opciones
+OPT="mirror --delete --depth-first --only-newer --no-empty-dirs --loop --verbose --log=/etc/proftpd/task/log/update.segurmatica.log"
+#... Comando
+lftp -c mirror $SRC $DES/ $OPT
+#......................................................................

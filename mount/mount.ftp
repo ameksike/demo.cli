@@ -1,0 +1,15 @@
+#!/bin/bash
+### BEGIN INIT INFO 
+# @provides		mount.store
+# @author		Antonio Membrides Espinosa
+# @author_URI:  https://github.com/ameksike
+# @package  	Task
+# @date			15/01/2018
+# @update		15/02/2018
+# @version    	1.0
+# @license    	GPL
+# @short		
+# @description 	Mount FTP Server
+### END INIT INFO
+
+curlftpfs -o allow_other desoft:abcd-1234@store.cfg.desoft.cu /home/desoft/store

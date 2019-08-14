@@ -1,0 +1,74 @@
+#!/bin/bash
+### BEGIN INIT INFO 
+# @provides		update.nod32
+# @author		Antonio Membrides Espinosa
+# @author_URI:  https://github.com/ameksike
+# @package  	Task
+# @date			05/10/2017
+# @update		15/02/2018
+# @version    	1.0
+# @license    	GPL
+# @short		
+# @description 	Update Antivirus
+### END INIT INFO
+
+#......................................................................
+#... Ruta de la fuente de actualización general 
+SRC="ftp://pub.desoft.cu/Antivirus/nod32/" 
+#... Ruta del destino de actualización general
+DES="/srv/ftp/bin/antivirus/eset.nod32/update/general/" 
+#... Opciones
+OPT="mirror --delete --depth-first --only-newer --no-empty-dirs --loop --verbose --log=/etc/proftpd/task/log/update.eset.nod32.global.log --exclude v*/ "
+#... Comando
+lftp -c mirror $SRC $DES/ $OPT
+
+#......................................................................
+#... Ruta de la fuente de actualización version 5
+SRC="ftp://pub.desoft.cu/Antivirus/nod32/v5/" 
+#... Ruta del destino de actualización version 5
+DES="/srv/ftp/bin/antivirus/eset.nod32/update/version.5.X/" 
+#... Opciones
+OPT="mirror --delete --depth-first --only-newer --no-empty-dirs --loop --verbose --log=/etc/proftpd/task/log/update.eset.nod32.version.5.x.log"
+#... Comando
+lftp -c mirror $SRC $DES/ $OPT
+
+#......................................................................
+#... Ruta de la fuente de actualización version 6
+SRC="ftp://pub.desoft.cu/Antivirus/nod32/v6/" 
+#... Ruta del destino de actualización version 6
+DES="/srv/ftp/bin/antivirus/eset.nod32/update/version.6.X/" 
+#... Opciones
+OPT="mirror --delete --depth-first --only-newer --no-empty-dirs --loop --verbose --log=/etc/proftpd/task/log/update.eset.nod32.version.6.x.log"
+#... Comando
+lftp -c mirror $SRC $DES/ $OPT
+
+#......................................................................
+#... Ruta de la fuente de actualización version 7
+SRC="ftp://pub.desoft.cu/Antivirus/nod32/v7/" 
+#... Ruta del destino de actualización version 7
+DES="/srv/ftp/bin/antivirus/eset.nod32/update/version.7.X/" 
+#... Opciones
+OPT="mirror --delete --depth-first --only-newer --no-empty-dirs --loop --verbose --log=/etc/proftpd/task/log/update.eset.nod32.version.7.x.log"
+#... Comando
+lftp -c mirror $SRC $DES/ $OPT
+
+#......................................................................
+#... Ruta de la fuente de actualización version 8
+SRC="ftp://pub.desoft.cu/Antivirus/nod32/v8/" 
+#... Ruta del destino de actualización version 8
+DES="/srv/ftp/bin/antivirus/eset.nod32/update/version.8.X/" 
+#... Opciones
+OPT="mirror --delete --depth-first --only-newer --no-empty-dirs --loop --verbose --log=/etc/proftpd/task/log/update.eset.nod32.version.8.x.log"
+#... Comando
+lftp -c mirror $SRC $DES/ $OPT
+
+#......................................................................
+#... Ruta de la fuente de actualización version 9
+SRC="ftp://pub.desoft.cu/Antivirus/nod32/v9/" 
+#... Ruta del destino de actualización version 9
+DES="/srv/ftp/bin/antivirus/eset.nod32/update/version.9.X/" 
+#... Opciones
+OPT="mirror --delete --depth-first --only-newer --no-empty-dirs --loop --verbose --log=/etc/proftpd/task/log/update.eset.nod32.version.9.x.log"
+#... Comando
+lftp -c mirror $SRC $DES/ $OPT
+#......................................................................

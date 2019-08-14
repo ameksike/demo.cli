@@ -1,0 +1,88 @@
+#! /bin/sh
+#
+### BEGIN INIT INFO
+# @provides             sqtool
+# @author               Antonio Membrides Espinosa
+# @author_URI:  https://github.com/ameksike
+# @package      Task
+# @date                 15/01/2018
+# @update               15/02/2018
+# @version      1.0
+# @license      GPL
+# @short
+# @description  Manage Squid services
+### END INIT INFO
+
+NAME=sqadm
+BIN=/etc/init.d/squid
+
+echo "..............................................."
+echo "... Ksike Squid Administrations Services    ..."
+echo "..............................................."
+
+case "$1" in
+		allow)
+		TPL=/etc/squid/tpl/squid.user.all.allow.conf
+        echo "set allow all squid user"
+        cp $TPL /etc/squid/squid.conf
+        $BIN restart
+	;;
+
+    deny)
+        TPL=/etc/squid/tpl/squid.user.all.deny.conf
+        echo "set deny all squid user"
+        cp $TPL /etc/squid/squid.conf
+        $BIN restart
+
+	;;
+
+    log)
+		tailf /var/log/squid/access.log
+    ;;
+
+
+    restart)
+		$BIN restart
+    ;;
+
+
+    date|time)
+		echo "To set date and time run this command:"
+		echo " date --set \"2019-07-19 9:52\" "
+        ;;
+
+    install)
+		echo ".................................................................."
+		echo "cp $0  /etc/init.d/ .............................................."
+		echo "chmod +x /etc/init.d/sqadm ......................................."	
+		echo ".................................................................."
+		cp $0  /etc/init.d/
+		chmod +x /etc/init.d/sqadm
+    ;;
+
+    test)
+		echo ".................................................................."
+		echo "Testing EICMA connections ........................................"
+		echo ".................................................................."
+		wget ftp://ftp.eicma.cu/
+		echo ".................................................................."
+		echo "Testing OSDE connections ........................................."
+		echo ".................................................................."
+		wget conferencia.labiofam.cu
+		echo ".................................................................."
+		echo "Testing INTERNET connections ....................................."
+		echo ".................................................................."
+		wget www.google.com
+    ;;
+
+    status)
+        echo "Status"
+        $BIN status
+	;;
+    *)
+		echo "Usage: /etc/squid/task/$NAME {allow|deny|status|restart|log|date|time|test|install}"
+		exit 3
+	;;
+esac
+
+exit 0
